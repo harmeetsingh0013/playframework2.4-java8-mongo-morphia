@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+	<contextName>Play-Mongo-Morphia-Sample</contextName>
+
+	<timestamp key="timeFormat" datePattern="yyyyMMdd'T'HHmmss"	timeReference="contextBirth" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss} %contextName [%thread] %-5level %logger{60} [Line-No:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${application.home}/play-mongo-morphia</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${application.home}/play-mongo-morphia-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy	class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>6</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss} %contextName [%thread] %-5level %logger{60} [Line-No:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="play" level="INFO" />
+	<logger name="application" level="DEBUG" />
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
